@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Machine from './components/Machine';
 
 function App() {
+  const symbolsArray = ['🐶', '🐱', '🐟']
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>SLOT MACHINES!</h1>
+      <Machine s1='🐶' s2='🐱' s3='🐟' />
+      <Machine s1='🐶' s2='🐶' s3='🐶' />
+      <Machine s1='🐟' s2='🐱' s3='🐟' />
     </div>
   );
 }
 
 export default App;
+
+//4 snakes (or some funny symbol) = lost 10% of your money
+//4 (unicorn || narwhal || dragon || ghosts) 10000x the bet
+//1 (unicorn || narwhal || dragon || ghosts) 10x the bet
+//1 (unicorn || narwhal || dragon || ghosts) 10*x
+//grid template areas!
+//choose your own adventure roleplay type game based off of slots!! Fully react. 
