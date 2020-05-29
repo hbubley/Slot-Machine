@@ -1,9 +1,10 @@
 import React from 'react'
+import Slots from './Slots'
 
-const Machine = ({s1, s2 , s3}) => {
+const Machine = () => {
     return (
         <div>
-            
+            <Slots />
         </div>
     )
 }

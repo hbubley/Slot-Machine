@@ -1,19 +1,16 @@
-import React from 'react';
-import './App.css';
-import Machine from './components/game-parts/Machine';
+import React from "react";
+import "./App.css";
+import Machine from "./components/game-parts/Machine";
+import SlotState from "./context/slots/SlotState";
 
 function App() {
-  const symbolsArray = ['🐶', '🐱', '🐟']
-  const getRandomNumArray = () => {
-    
-  }
   return (
-    <div className="App">
-      <h1>SLOT MACHINES!</h1>
-      <Machine s1='🐶' s2='🐱' s3='🐟' />
-      <Machine s1='🐶' s2='🐶' s3='🐶' />
-      <Machine s1='🐟' s2='🐱' s3='🐟' />
-    </div>
+    <SlotState>
+      <div className="App">
+        <h1>SLOT MACHINES!</h1>
+        <Machine />
+      </div>
+    </SlotState>
   );
 }
 
@@ -24,4 +21,4 @@ export default App;
 //1 (unicorn || narwhal || dragon || ghosts) 10x the bet
 //1 (unicorn || narwhal || dragon || ghosts) 10*x
 //grid template areas!
-//choose your own adventure roleplay type game based off of slots!! Fully react. 
+//choose your own adventure roleplay type game based off of slots!! Fully react.
