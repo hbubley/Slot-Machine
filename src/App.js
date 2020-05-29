@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
-import Machine from './components/Machine';
+import Machine from './components/game-parts/Machine';
 
 function App() {
   const symbolsArray = ['🐶', '🐱', '🐟']
+  const getRandomNumArray = () => {
+    
+  }
   return (
     <div className="App">
       <h1>SLOT MACHINES!</h1>
