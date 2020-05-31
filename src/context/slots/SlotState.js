@@ -23,7 +23,7 @@ const SlotState = props => {
 const getSlotsArray = () => {
     const {iconArray} = state
     let newArray = []
-    
+    toggleSpin()
     for(let i=0; i < iconArray.length; i++){
         let ranNum = Math.floor(Math.random()*Math.floor(iconArray.length))
         let icon = iconArray[ranNum]
@@ -49,6 +49,12 @@ const getResults = (array) => {
     })
 }
 
+const toggleSpin = () => {
+    dispatch({
+        type: TOGGLE_SPIN,
+    })
+}
+
 
 
 
@@ -61,7 +67,8 @@ const getResults = (array) => {
                 results: state.results,
                 isShowingResults: state.isShowingResults,
                 getSlotsArray,
-                getResults
+                getResults,
+                toggleSpin
             }}
         >
             {props.children}

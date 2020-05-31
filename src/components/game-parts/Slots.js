@@ -1,19 +1,23 @@
-import React, {useContext, Fragment} from 'react'
-import SlotContext from '../../context/slots/slotContext'
-import Slot from './Slot'
+import React, { useContext } from "react";
+import SlotContext from "../../context/slots/slotContext";
+import Slot from "./Slot";
 
 const Slots = () => {
-const slotContext = useContext(SlotContext)
-const { slotsArray, getSlotsArray} = slotContext
-
+  const slotContext = useContext(SlotContext);
+  const { slotsArray, iconArray } = slotContext;
+  if (slotsArray === null) {
     return (
-        <Fragment>
-        {slotsArray && slotsArray.map((icon, index) => (
-            <Slot icon={icon} index={index}/>
-        ))}
-        <button onClick={getSlotsArray}>CLICK</button>
-        </Fragment>
-    )
-}
+      <div className="slots-container grid-3">
+        {iconArray.map((icon, index) => <Slot icon={icon} index={index} />)}
+      </div>
+    );
+  } else if (slotsArray) {
+    return (
+      <div className="slots-container grid-3">
+        {slotsArray.map((icon, index) => <Slot icon={icon} index={index} />)}
+      </div>
+    );
+  }
+};
 
-export default Slots
+export default Slots;

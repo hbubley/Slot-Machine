@@ -6,7 +6,7 @@ const Results = () => {
     const {results} = slotContext 
     if(results && results !== null){
     return (
-        <div>
+        <div className='results-container'>
            {results === 'winner' ? <h1>WINNER!</h1> : <h1>LOSER!</h1>} 
         </div>
     )

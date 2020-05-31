@@ -1,0 +1,9 @@
+@import "../../App.scss";
+
+.slots-container{
+    @extend .p-2;
+    .slot-container{
+        @extend .card;
+        @extend .large;
+    }
+}

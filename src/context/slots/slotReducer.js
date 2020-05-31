@@ -18,10 +18,14 @@ export default (state, action) => {
         case RESULTS:
             return {
                 ...state,
-                results: action.payload
+                results: action.payload,
+                isSpinning: false 
             }
         case TOGGLE_SPIN:
-            return state
+            return {
+                ...state,
+                isSpinning: true 
+            }
         case TOGGLE_RESULTS:
             return state
         default:
