@@ -29,16 +29,28 @@ const getSlotsArray = () => {
         let icon = iconArray[ranNum]
         newArray.push(icon)
     }
-    console.log(newArray)
-    
-    
+    getResults(newArray);
     dispatch({
         type: GET_SLOTS_ARRAY,
         payload: newArray
     })
 }
 
-//check random array of ny
+const getResults = (array) => {
+    let newResult=''
+    if(array.every(icon => icon === array[0])){
+        newResult = 'winner'
+    }else{
+        newResult = 'loser'
+    }
+    dispatch({
+        type: RESULTS,
+        payload: newResult
+    })
+}
+
+
+
 
     return (
         <SlotContext.Provider
@@ -48,7 +60,8 @@ const getSlotsArray = () => {
                 isSpinning: state.isSpinning,
                 results: state.results,
                 isShowingResults: state.isShowingResults,
-                getSlotsArray
+                getSlotsArray,
+                getResults
             }}
         >
             {props.children}

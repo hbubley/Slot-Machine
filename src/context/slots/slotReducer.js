@@ -16,7 +16,10 @@ export default (state, action) => {
         case CLEAR_GAME:
             return state
         case RESULTS:
-            return state
+            return {
+                ...state,
+                results: action.payload
+            }
         case TOGGLE_SPIN:
             return state
         case TOGGLE_RESULTS:
