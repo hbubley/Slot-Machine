@@ -1,6 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+health is decreased by 20 each turn.
 
-## Available Scripts
+you can make it 5 turns without dying
+
+change amount of turns to 20
+
+## Health
+
+
 
 In the project directory, you can run:
 

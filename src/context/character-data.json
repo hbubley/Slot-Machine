@@ -1,0 +1,28 @@
+{
+    "mouse": {
+        "animal": "Mouse",
+        "avatar": "",
+        "hunger": 100,
+        "health": 100,
+        "strength": 0.2,
+        "offspring": 10,
+        "counter-animal": "snake",
+        "iconArray": 
+    },
+    "snake": {
+        "hunger": 200,
+        "health": 100,
+        "strength": 0.4,
+        "offspring": 5,
+        "counter-animal": "badger",
+        "icon": ""
+    },     
+    "badger": {
+        "hunger": 100,
+        "health": 100,
+        "strength": 0.7,
+        "offspring": 2,
+        "counter-animal": "eagle",
+        "icon": ""
+    } 
+}

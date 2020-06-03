@@ -20,7 +20,7 @@ export default (state, action) => {
                 ...state,
                 results: action.payload,
                 isSpinning: false 
-            }
+          }
         case TOGGLE_SPIN:
             return {
                 ...state,
