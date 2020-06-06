@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
 import Slots from './Slots'
-import Results from './Results'
+import CharacterStat from "../character/CharacterStat"
 import './game-parts.scss'
 import SlotContext from '../../context/slots/slotContext'
 
-const Machine = () => {
+const Game = () => {
     const slotContext = useContext(SlotContext)
-    const { getSlotsArray} = slotContext
+    const {getSlotsArray} = slotContext
     return (
         <div className='all-center'>
             <Slots />
-            <Results />
+            <CharacterStat />
             <button onClick={getSlotsArray}>CLICK</button>
         </div>
     )
 }
-export default Machine
+export default Game

@@ -3,7 +3,8 @@ import {
   CLEAR_GAME,
   RESULTS,
   TOGGLE_SPIN,
-  TOGGLE_RESULTS,
+  TOGGLE_IS_READY,
+  SET_CHARACTER
 } from "../types";
 
 export default (state, action) => {
@@ -21,13 +22,22 @@ export default (state, action) => {
                 results: action.payload,
                 isSpinning: false 
           }
+          case SET_CHARACTER:
+            return {
+              ...state,
+              characterInitial: action.payload,
+              hasCharacter: true
+            }
         case TOGGLE_SPIN:
             return {
                 ...state,
                 isSpinning: true 
             }
-        case TOGGLE_RESULTS:
-            return state
+        case TOGGLE_IS_READY:
+            return{
+                ...state,
+                isReady: true
+            } 
         default:
             return state;
     }

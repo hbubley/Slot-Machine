@@ -4,8 +4,7 @@ const Home = () => {
     return (
         <div>
             <h1>Welcome To Darwin!</h1>
-            <h3>Survival of the fittest, kind of...</h3>
-            <p>In order to start, choose your animal</p>
+            <h3>Survival of the fittest... with a twist</h3>
         </div>
     )
 }
