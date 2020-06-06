@@ -7,12 +7,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Contact from './components/pages/Contact'
-import CharacterState from "./context/character/CharacterState";
 
 function App() {
   return (
     <SlotState>
-      <CharacterState>
       <Router>
         <Navbar icon="Coool logo" title="Darwin" />
         <div className="main-container all-center">
@@ -24,7 +22,6 @@ function App() {
           </Switch>
         </div>
       </Router>
-      </CharacterState>
     </SlotState>
   );
 }

@@ -4,7 +4,8 @@ import Slot from "./Slot";
 
 const Slots = () => {
   const slotContext = useContext(SlotContext);
-  const { slotsArray, characterIconArray, iconArray } = slotContext;
+  const { slotsArray, iconArray, getHuntSpin } = slotContext;
+
   if (slotsArray === null) {
     return (
       <div className="slots-container grid-3">
@@ -13,9 +14,11 @@ const Slots = () => {
     );
   } else if (slotsArray) {
     return (
+      <>
       <div className="slots-container grid-3">
         {slotsArray.map((icon, index) => <Slot icon={icon} index={index} key={index}/>)}
       </div>
+      </>
     );
   }
 };

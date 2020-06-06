@@ -6,12 +6,12 @@ import SlotContext from '../../context/slots/slotContext'
 
 const Game = () => {
     const slotContext = useContext(SlotContext)
-    const {getSlotsArray} = slotContext
+    const {getHuntSpin} = slotContext
     return (
         <div className='all-center'>
             <Slots />
             <CharacterStat />
-            <button onClick={getSlotsArray}>CLICK</button>
+            <button onClick={getHuntSpin}>HUNT</button>
         </div>
     )
 }
