@@ -43,17 +43,6 @@ export default (state, action) => {
                 isReady: true
             } 
         case HUNT:
-            // const {character} = state
-            // let hunger = -10
-            // let predatorCount = action.payload.filter(icon => icon === character.iconArrayHunt[1])
-            // let preyCount = action.payload.filter(icon => icon === character.iconArrayHunt[2])
-            // let neutralCount = action.payload.filter(icon => icon === character.iconArrayHunt[0])
-            // console.log("PRED", predatorCount)
-            // console.log("PREy", preyCount)
-            // console.log("newt", neutralCount)
-            // if(action.payload[0]===character.iconArrayHunt[1]) && (action.payload[1]===character.iconArrayHunt[1]){
-            //     hunger = hunger+30
-            // }
             return{
                 ...state,
                 slotsArray: action.payload.spinResult,
