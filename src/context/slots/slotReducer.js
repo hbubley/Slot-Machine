@@ -1,19 +1,19 @@
 import {
-  GET_SLOTS_ARRAY,
+  GET_CHARACTER_SPIN,
   CLEAR_GAME,
   RESULTS,
   TOGGLE_SPIN,
   TOGGLE_IS_READY,
   SET_CHARACTER,
-  HUNT
+  ACTION_SPIN,
 } from "../types";
 
 export default (state, action) => {
     switch(action.type){
-        case GET_SLOTS_ARRAY:
+        case GET_CHARACTER_SPIN:
             return {
                 ...state,
-                slotsArray: action.payload
+                slotsArray: action.payload,
             }
         case CLEAR_GAME:
             return state
@@ -29,7 +29,7 @@ export default (state, action) => {
               character: action.payload,
               characterHealth: action.payload.health,
               characterHunger: action.payload.hunger,
-              characterOffspring: action.payload.offspring,
+              characterOffspring: 0,
               hasCharacter: true
             }
         case TOGGLE_SPIN:
@@ -42,12 +42,15 @@ export default (state, action) => {
                 ...state,
                 isReady: true
             } 
-        case HUNT:
+        case ACTION_SPIN:
+            console.log("IN REDUCER CHAROFF STATE", state.characterOffspring)
+            console.log("IN REDUCER OFFSPRING", action.payload.offspring)
             return{
                 ...state,
                 slotsArray: action.payload.spinResult,
                 characterHealth: (state.characterHealth)+(action.payload.health),
                 characterHunger: (state.characterHunger)+(action.payload.hunger),
+                characterOffspring: (state.characterOffspring)+(action.payload.offspring),
                 isSpinning: false
             } 
         default:

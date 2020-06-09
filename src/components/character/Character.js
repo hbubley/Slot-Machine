@@ -4,10 +4,9 @@ const Character = ({ character }) => {
   return (
     <div>
       <i className={character.icon}></i>
-      <p>Initial health: {character.health}</p>
-      <p>Initial hunger: {character.hunger}</p>
+      <p>Health: {character.health}</p>
+      <p>Hunger: {character.hunger}</p>
       <p>Number of offspring: {character.offspring}</p>
-      <p>Strength: {character.strength}</p>
     </div>
   );
 };

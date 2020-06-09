@@ -3,14 +3,13 @@ import SlotContext from "./slotContext";
 import SlotReducer from "./slotReducer";
 import characterData from "../character-data.json";
 import {
-  GET_SLOTS_ARRAY,
-  GET_GAME_SLOTS_ARRAY,
+  GET_CHARACTER_SPIN,
   CLEAR_GAME,
   RESULTS,
   TOGGLE_SPIN,
   SET_CHARACTER,
   TOGGLE_IS_READY,
-  HUNT
+  ACTION_SPIN
 } from "../types";
 
 const SlotState = (props) => {
@@ -20,7 +19,6 @@ const SlotState = (props) => {
       "fad fa-badger-honey",
       "fad fa-snake",
       "fad fa-snake",
-      "fad fa-rabbit",
       "fad fa-rabbit",
       "fad fa-rabbit",
     ],
@@ -44,6 +42,7 @@ const SlotState = (props) => {
       let icon = array[ranNum];
       newArray.push(icon);
     }
+    console.log('newArray', newArray)
     return newArray;
   };
 
@@ -52,7 +51,7 @@ const SlotState = (props) => {
     let newArray = spin(characterIconArray);
     getResults(newArray);
     dispatch({
-      type: GET_SLOTS_ARRAY,
+      type: GET_CHARACTER_SPIN,
       payload: newArray,
     });
   };
@@ -97,15 +96,14 @@ const SlotState = (props) => {
   };
 
   const getHuntSpin = () => {
-    toggleSpin()
     const { character } = state;
     let spinResult = spin(character.iconArrayHunt);
-    let hunger = 0
+    let hunger = -10
     let health = 0
+    let offspring = 0
     let predatorCount = spinResult.filter(icon => icon === character.iconArrayHunt[1])
     let preyCount = spinResult.filter(icon => icon === character.iconArrayHunt[2])
     if(predatorCount.length){
-        console.log("pred count", predatorCount.length)
         if(predatorCount.length === 1){
             health=-10
         }
@@ -117,31 +115,30 @@ const SlotState = (props) => {
         }
     } 
     if(preyCount.length){
-        console.log("prey count", preyCount.length)
         if(preyCount.length === 1){
-            hunger=20
+            hunger=hunger+10
         }
         else if(preyCount.length === 2){
-            hunger=30
+            hunger=hunger+30
         }
-        else{
-            hunger=50
+        else if (preyCount.length === 3){
+            hunger=hunger+50
         }
     }
     dispatch({
-      type: HUNT,
-      payload: {spinResult, health, hunger}
+      type: ACTION_SPIN,
+      payload: {spinResult, health, hunger, offspring}
     });
   };
   const getBreedSpin = () => {
-    toggleSpin()
     const { character } = state;
-    let spinResult = spin(character.iconArrayHunt);
-    let hunger = 0
+    let spinResult = spin(character.iconArrayBreed);
+    let hunger = -10
     let health = 0
-    let predatorCount = spinResult.filter(icon => icon === character.iconArrayHunt[1])
-    let preyCount = spinResult.filter(icon => icon === character.iconArrayHunt[2])
-    let neutralCount = spinResult.filter(icon => icon === character.iconArrayHunt[0])
+    let offspring = 0
+    let predatorCount = spinResult.filter(icon => icon === character.iconArrayBreed[1])
+    let babyCount = spinResult.filter(icon => icon === character.iconArrayBreed[2])
+    let neutralCount = spinResult.filter(icon => icon === character.iconArrayBreed[0])
     if(predatorCount.length){
         console.log("pred count", predatorCount.length)
         if(predatorCount.length === 1){
@@ -154,34 +151,56 @@ const SlotState = (props) => {
             health=-50
         }
     } 
-    if(preyCount.length){
-        console.log("prey count", preyCount.length)
-        if(preyCount.length === 1){
-            hunger=20
+    if(babyCount.length && neutralCount.length && !(predatorCount.length)){
+        console.log("baby count", babyCount.length)
+        if(babyCount.length === 2){
+            offspring=Math.floor(character.offspring/2)
         }
-        else if(preyCount.length === 2){
-            hunger=30
+        else if(babyCount.length === 1){
+          offspring=character.offspring
         }
-        else{
-            hunger=50
-        }
+    }else if(neutralCount.length===3){
+      offspring=character.offspring
     }
+    console.log("IN STATE", offspring)
     dispatch({
-      type: HUNT,
-      payload: {spinResult, health, hunger}
-    });
-    dispatch({
-      type: GET_SLOTS_ARRAY,
-      payload: spinResult,
+      type: ACTION_SPIN,
+      payload: {spinResult, health, hunger, offspring}
     });
   };
   const getRestSpin = () => {
     const { character } = state;
     let spinResult = spin(character.iconArrayRest);
-    getResults(spinResult, "hunt");
+    let hunger = -10
+    let health = 0
+    let offspring = 0
+    let predatorCount = spinResult.filter(icon => icon === character.iconArrayRest[1])
+    let restCount = spinResult.filter(icon => icon === character.iconArrayRest[2])
+    let neutralCount = spinResult.filter(icon => icon === character.iconArrayRest[0])
+    if(predatorCount.length){
+        if(predatorCount.length === 1){
+            health=-10
+        }
+        else if(predatorCount.length === 2){
+            health=-20
+        }
+        else{
+            health=-50
+        }
+    } 
+    if(restCount.length && neutralCount.length && !(predatorCount.length)){
+        if(restCount.length === 2){
+            health = 20
+        }
+        else if(restCount.length === 1){
+          health = 10
+        }
+    }else if(neutralCount.length===3 || restCount.length===3){
+      health=30
+    }
     dispatch({
-      type: GET_SLOTS_ARRAY,
-      payload: spinResult,
+      type: ACTION_SPIN,
+      payload: {spinResult, health, hunger, offspring},
     });
   };
 
@@ -206,6 +225,7 @@ const SlotState = (props) => {
         character: state.character,
         characterHealth: state.characterHealth,
         characterHunger: state.characterHunger,
+        characterOffspring: state.characterOffspring,
         slotsArray: state.slotsArray,
         isSpinning: state.isSpinning,
         results: state.results,

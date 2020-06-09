@@ -19,9 +19,9 @@
         "strength": 0.4,
         "offspring": 5,
         "counter-animal": "badger",
-        "iconArrayBreed": ["fad fa-snake", "fad fa-badger", "fad fa-baby-carriage"], 
-        "iconArrayHunt": ["fad fa-snake", "fad fa-Wbadger", "fad fa-rabbit" ], 
-        "iconArrayRest": ["fad fa-snake", "fad fa-badger", "fad fa-snooze"] 
+        "iconArrayBreed": ["fad fa-snake", "fad fa-badger-honey", "fad fa-baby-carriage"], 
+        "iconArrayHunt": ["fad fa-snake", "fad fa-badger-honey", "fad fa-rabbit"], 
+        "iconArrayRest": ["fad fa-snake", "fad fa-badger-honey", "fad fa-snooze"] 
     },     
     "badger": {
         "animal": "badger",
@@ -31,9 +31,9 @@
         "strength": 0.7,
         "offspring": 2,
         "counter-animal": "eagle",
-        "iconArrayBreed": ["fad fa-badger", "fad fa-paw-claws","fad fa-baby-carriage"], 
-        "iconArrayHunt": ["fad fa-badger", "fad fa-paw-claws", "fad fa-snake"], 
-        "iconArrayRest": ["fad fa-badger", "fad fa-paw-claws", "fad fa-snooze"] 
+        "iconArrayBreed": ["fad fa-badger-honey", "fad fa-paw-claws", "fad fa-baby-carriage"], 
+        "iconArrayHunt": ["fad fa-badger-honey", "fad fa-paw-claws", "fad fa-snake"], 
+        "iconArrayRest": ["fad fa-badger-honey", "fad fa-paw-claws", "fad fa-snooze"] 
     } 
 }
 
