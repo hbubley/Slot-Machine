@@ -1,22 +1,27 @@
 import React, { useContext } from "react";
 import SlotContext from "../../context/slots/slotContext";
+import Character from "./Character";
+import AllCharacters from "./AllCharacters";
 
 const CharacterResults = () => {
-  const slotContext = useContext(SlotContext);
-  const { character } = slotContext;
-  if (character === null) {
-    return <h1>Click until you match an animal</h1>;
-  } else {
-    return (
-      <div>
-        <h1>In this run you will be playing as a {character.animal}</h1>
-        <p>Initial health: {character.health}</p>
-        <p>Initial hunger: {character.hunger}</p>
-        <p>Number of offspring: {character.offspring}</p>
-        <p>Strength: {character.strength}</p>
-      </div>
-    );
-  }
+    const slotContext = useContext(SlotContext);
+    const { character, characterArray } = slotContext;
+    if (character === null) {
+        return (
+            <div>
+                <h1>Click until you match an animal</h1>
+                <h3>Possible options:</h3>
+                <AllCharacters characterArray={characterArray}/>
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <h1>In this run you will be playing as a {character.animal}</h1>
+                <Character character={character} />
+            </div>
+        );
+    }
 };
 
 export default CharacterResults;

@@ -2,11 +2,12 @@ import React from "react";
 
 const Character = ({ character }) => {
   return (
-    <div>
-      <i className={character.icon}></i>
+    <div className="character-card">
+      <i className={character.avatar}></i>
       <p>Health: {character.health}</p>
       <p>Hunger: {character.hunger}</p>
-      <p>Number of offspring: {character.offspring}</p>
+      <p>Possible offspring amount: {character.offspring}</p>
+      <p>Strength: {character.strength}</p>
     </div>
   );
 };

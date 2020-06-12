@@ -1,6 +1,6 @@
 {
     "rabbit": {
-        "animal": "Rabbit",
+        "animal": "rabbit",
         "avatar": "fad fa-rabbit",
         "hunger": 100,
         "health": 100,

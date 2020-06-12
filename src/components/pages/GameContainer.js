@@ -5,12 +5,11 @@ import CharacterSelect from "../character/CharacterSelect";
 
 const GameContainer = () => {
   const slotContext = useContext(SlotContext);
-  const {character, isReady, toggleIsReady} = slotContext
+  const {isReady} = slotContext
   if (isReady === false) {
     return (
       <div>
         <CharacterSelect />
-        <button hidden={character===null} onClick={toggleIsReady}>Continue</button>
       </div>
     );
   } else {

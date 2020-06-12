@@ -3,17 +3,16 @@ import Slots from './Slots'
 import CharacterStat from "../character/CharacterStat"
 import './game-parts.scss'
 import SlotContext from '../../context/slots/slotContext'
+import Controls from './Controls'
 
 const Game = () => {
     const slotContext = useContext(SlotContext)
-    const {getHuntSpin, getBreedSpin, getRestSpin, characterHunger, character, characterHealth, characterOffspring} = slotContext
+    const {characterHunger, character, characterHealth, characterOffspring} = slotContext
     return (
-        <div className='all-center'>
+        <div className='all-center game-container'>
             <Slots />
+            <Controls />
             <CharacterStat character={character} characterHealth={characterHealth} characterHunger={characterHunger} characterOffspring={characterOffspring}/>
-            <button onClick={getHuntSpin}>HUNT</button>
-            <button onClick={getBreedSpin}>BREED</button>
-            <button onClick={getRestSpin}>REST</button>
         </div>
     )
 }
