@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import Game from "../game-parts/Game";
 import SlotContext from "../../context/slots/slotContext";
 import CharacterSelect from "../character/CharacterSelect";
@@ -8,15 +8,16 @@ const GameContainer = () => {
   const {isReady} = slotContext
   if (isReady === false) {
     return (
-      <div>
+      <Fragment>
+        <h1>Darwin</h1>
         <CharacterSelect />
-      </div>
+      </Fragment>
     );
   } else {
     return (
-      <div>
+      <Fragment>
         <Game />
-      </div>
+      </Fragment>
     );
   }
 };

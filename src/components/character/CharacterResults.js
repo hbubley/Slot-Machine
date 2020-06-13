@@ -5,13 +5,13 @@ import AllCharacters from "./AllCharacters";
 
 const CharacterResults = () => {
     const slotContext = useContext(SlotContext);
-    const { character, characterArray } = slotContext;
+    const { character } = slotContext;
     if (character === null) {
         return (
             <div>
                 <h1>Click until you match an animal</h1>
                 <h3>Possible options:</h3>
-                <AllCharacters characterArray={characterArray}/>
+                <AllCharacters />
             </div>
         );
     } else {

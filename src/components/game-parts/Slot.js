@@ -1,8 +1,10 @@
 import React from "react";
 
-const Slot = ({ icon, index }) => {
+const Slot = ({ icon, index, style }) => {
+  let newIcon = `slot-container ${style}`
+  console.log("BLEB", newIcon)
   return (
-    <div className="slot-container">
+    <div className={newIcon}>
       <i className={icon} key={index}></i>
     </div>
   );

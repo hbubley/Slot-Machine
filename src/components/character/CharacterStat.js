@@ -1,9 +1,8 @@
 import React from "react";
 
 const CharacterStat = ({character, characterHealth, characterHunger, characterOffspring}) => {
-  console.log(character.icon)
   return (
-    <div>
+    <div className="character-card">
       <i className={character.avatar}></i>
       <p>Health: {characterHealth}</p>
       <p>Hunger: {characterHunger}</p>

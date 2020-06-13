@@ -10,7 +10,7 @@ const CharacterSelect = () => {
   const { getCharacterSpin, character, toggleIsReady } = slotContext;
   return (
     <div>
-      <h1>Click until you match an animal</h1>
+      <h1>Before you begin your adventure we first must let fate find you a companion</h1>
       <Slots />
       <Button hiddenCondition={character !== null} action="CLICK" actionFn={getCharacterSpin} />
       <Button hiddenCondition={character===null} action="BEGIN" actionFn={toggleIsReady} />

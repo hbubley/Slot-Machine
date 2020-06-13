@@ -6,7 +6,7 @@
         "health": 100,
         "strength": 0.2,
         "offspring": 10,
-        "counter-animal": "snake",
+        "counter_animal": "fad fa-snake",
         "iconArrayBreed": ["fad fa-rabbit", "fad fa-snake", "fad fa-baby-carriage"], 
         "iconArrayHunt": ["fad fa-rabbit", "fad fa-snake", "fad fa-carrot"], 
         "iconArrayRest": ["fad fa-rabbit", "fad fa-snake", "fad fa-snooze"] 
@@ -18,7 +18,7 @@
         "health": 100,
         "strength": 0.4,
         "offspring": 5,
-        "counter-animal": "badger",
+        "counter_animal": "fad fa-badger-honey",
         "iconArrayBreed": ["fad fa-snake", "fad fa-badger-honey", "fad fa-baby-carriage"], 
         "iconArrayHunt": ["fad fa-snake", "fad fa-badger-honey", "fad fa-rabbit"], 
         "iconArrayRest": ["fad fa-snake", "fad fa-badger-honey", "fad fa-snooze"] 
@@ -27,10 +27,10 @@
         "animal": "badger",
         "avatar": "fad fa-badger-honey",
         "hunger": 100,
-        "health": 100,
+        "health": 200,
         "strength": 0.7,
         "offspring": 2,
-        "counter-animal": "eagle",
+        "counter_animal": "fad fa-paw-claws",
         "iconArrayBreed": ["fad fa-badger-honey", "fad fa-paw-claws", "fad fa-baby-carriage"], 
         "iconArrayHunt": ["fad fa-badger-honey", "fad fa-paw-claws", "fad fa-snake"], 
         "iconArrayRest": ["fad fa-badger-honey", "fad fa-paw-claws", "fad fa-snooze"] 

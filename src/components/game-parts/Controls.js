@@ -5,12 +5,12 @@ import Button from '../layout/Button'
 
 const Controls = () => {
     const slotContext = useContext(SlotContext)
-    const {getHuntSpin, getBreedSpin, getRestSpin} = slotContext
+    const {getActionSpin, character} = slotContext
     return (
         <div className='controls'>
-            <Button actionFn={getHuntSpin} action="HUNT" />
-            <Button actionFn={getBreedSpin} action="BREED" />
-            <Button actionFn={getRestSpin} action="REST" />
+            <Button actionFn={getActionSpin} action="HUNT" iconArray={character.iconArrayHunt} />
+            <Button actionFn={getActionSpin} action="BREED" iconArray={character.iconArrayBreed}/>
+            <Button actionFn={getActionSpin} action="REST" iconArray={character.iconArrayRest} />
         </div>
     )
 }
