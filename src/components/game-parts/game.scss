@@ -6,15 +6,18 @@ $pine-tree: rgba(42, 44, 36, 1);
 $bittersweet: rgba(248, 118, 102, 1);
 /* SCSS RGB */
 $primary-color: rgba(149, 167, 141, 1);
+$highlight-color: rgb(238, 238, 136);
 $dark-color: rgba(42, 44, 36, 1);
 $light-color: rgba(200, 198, 175, 1);
-$danger-color: rgb(199, 119, 109);;
+$danger-color: rgb(199, 119, 109);
+;
 $success-color: rgb(188, 224, 165);
+$box-shadow: 0px 0px 20px -3px #888888;
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
+}
 
 .main-container {
     @extend .container;
@@ -24,69 +27,117 @@ $success-color: rgb(188, 224, 165);
     flex-direction: column;
     background-color: $bone;
     color: white;
+    border-radius: 5px;
+    box-shadow: $box-shadow
 }
-.home-container{
+
+.home-container {
     display: flex;
+    @extend .lead;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    img{
-        max-width: 40%;
+
+    img {
+        max-width: 60%;
+        margin: 4% 0;
+    }
+
+    a {
+        h1 {
+            @extend .gen-text;
+            border-radius: 5px;
+        }
     }
 }
+
 .game-container {
     .controls {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
+        button {
+            border-radius: 5px;
+        }
     }
 }
+
 .slots-container {
     @extend .p-2;
 
     .slot-container {
         @extend .card;
         @extend .large;
+        background-color: $timberwolf;
+        color: $dark-color
     }
-    .danger{
+
+    .danger {
         background: $danger-color;
+        color: $timberwolf
     }
-    .success{
+
+    .success {
         background-color: $success-color;
+        color: $dark-color;
     }
-    .neutral{
+
+    .neutral {
         background-color: $dark-color;
+        color: $timberwolf
     }
 }
+
 .all-characters {
     @extend .grid-3;
     margin: 0 auto;
 
     .character-card {
         @extend .card;
+        background-color: $pine-tree;
 
         i {
             @extend .large;
         }
     }
 }
+
 .character-card {
     @extend .card;
+    background-color: $pine-tree;
 
     i {
         @extend .x-large;
+        color: rgb(255, 255, 147);
     }
 }
-.button {
-    @extend .p;
+
+.button-style {
+    background: $primary-color;
+    color: #333;
+    padding: 0.4rem 1.3rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    outline: none;
+    border-radius: 5px;
+    &:hover {
+        transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in;
+        box-shadow: 2px 2px 20px 2px #888888;
+        background: $highlight-color;
+    }
+
     text-align: center;
 }
-.footer{
+
+.footer {
     @extend .p;
     width: 100%;
     display: block;
     background-color: black;
     color: white;
-    padding-left: 1%; 
+    padding-left: 1%;
+    box-shadow: $box-shadow;
 }

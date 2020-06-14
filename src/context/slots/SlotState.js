@@ -35,6 +35,11 @@ const SlotState = (props) => {
         isReady: false,
         generation: 1,
         slotsStyleArray: [],
+        pCount: 0,
+        sCount: 0,
+        fightResult: 0,
+        action: null,
+        statChangeObject: {}
     };
     const [state, dispatch] = useReducer(SlotReducer, initialState);
 
@@ -200,7 +205,7 @@ const SlotState = (props) => {
 
         dispatch({
             type: ACTION_SPIN,
-            payload: { spinArray, styleArray, health, hunger, offspring },
+            payload: { spinArray, styleArray, health, hunger, offspring, predatorCount, successCount, predators, action },
         });
     };
 
@@ -234,11 +239,17 @@ const SlotState = (props) => {
                 numberOfSpins: state.numberOfSpins,
                 generation: state.generation,
                 slotsStyleArray: state.slotsStyleArray,
+                pCount: state.pCount,
+                sCount: state.sCount,
+                fightResult: state.fightResult,
+                action: state.action,
+                statChangeObject: state.statChangeObject,
                 getCharacterSpin,
                 getResults,
                 toggleSpin,
                 toggleIsReady,
                 getActionSpin,
+                
             }}
         >
             {props.children}

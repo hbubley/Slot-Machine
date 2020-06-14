@@ -4,7 +4,8 @@ $dark-color: rgba(42, 44, 36, 1);
 $light-color: rgba(200, 198, 175, 1);
 $danger-color: rgba(248, 118, 102, 1);;
 $success-color: rgba(193, 255, 155, 1);
-
+$highlight-color: rgb(238, 238, 136);
+$box-shadow: 0px 0px 20px -3px #888888;
 
 $non-photo-blue: rgba(147, 232, 255, 1);
 $ultra-red: rgba(243, 124, 150, 1);
@@ -82,8 +83,12 @@ img {
   margin-bottom: 1rem;
 }
 
-.lead {
+.gen-text {
   font-size: 1.5rem;
+}
+
+.lead {
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -133,8 +138,9 @@ img {
 /* Cards */
 .card {
   padding: 1rem;
-  border: #ccc 1px dotted;
+  border: $primary-color 1px solid;
   margin: 0.7rem 0;
+  box-shadow: $box-shadow;
 }
 
 /* List */
@@ -240,8 +246,13 @@ img {
   border: none;
   cursor: pointer;
   margin-right: 0.5rem;
-  transition: opacity 0.2s ease-in;
   outline: none;
+  &:hover{
+    transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in; 
+    box-shadow: 2px 2px 20px 2px #888888;
+    background: $dark-color;
+    color: white;
+  }
 }
 
 .btn-link {
@@ -287,7 +298,10 @@ img {
   background: $primary-color;
   color: #fff;
 }
-
+.btn-highlight {
+  background-color: $highlight-color;
+  color: $dark-color;
+}
 .btn-light,
 .bg-light,
 .badge-light,
@@ -391,6 +405,7 @@ table th {
   width: 100%;
   opacity: 0.9;
   margin-bottom: 1rem;
+  box-shadow: $box-shadow;
 
   ul {
     display: flex;

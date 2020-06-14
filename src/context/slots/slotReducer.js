@@ -58,6 +58,10 @@ export default (state, action) => {
                     state.characterOffspring + action.payload.offspring,
                 numberOfSpins: state.numberOfSpins + 1,
                 generation: generationCount,
+                statChangeObject:{health: action.payload.health, hunger: action.payload.hunger, offspring: action.payload.offspring},
+                pCount: action.payload.predatorCount.length,
+                fightResult: action.payload.predators,
+                action: action.payload.action,
                 isSpinning: false,
             };
         default:
