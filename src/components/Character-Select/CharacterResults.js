@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import SlotContext from "../../context/slots/slotContext";
-import Character from "./Character";
-import AllCharacters from "./AllCharacters";
+import Character from "../character/Character";
+import AllCharacters from "../character/AllCharacters";
 
 const CharacterResults = () => {
     const slotContext = useContext(SlotContext);

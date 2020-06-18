@@ -1,7 +1,7 @@
 import React, { useContext, Fragment } from "react";
-import Game from "../game-parts/Game";
+import Game from "../Game/Game";
 import SlotContext from "../../context/slots/slotContext";
-import CharacterSelect from "../character/CharacterSelect";
+import CharacterSelect from "../Character-Select/CharacterSelect";
 
 const GameContainer = () => {
   const slotContext = useContext(SlotContext);

@@ -75,12 +75,17 @@ export default (state, action) => {
                 slotsStyleArray: action.payload.styleArray,
                 results: action.payload.resultsCountObject,
                 actionResult: action.payload.actionResult,
-                fightResult: action.payload.fightResult,
                 isSpinning: false
             };
         // case SPIN_OUTCOME:
         //     return {
         //         ...state,
+        //         gameObject: {
+        //             numberOfSpins: action.payload.spinCount,
+        //             generation: action.payload.generationCount,
+        //             fightResult: action.payload.fightResult,
+        //             actionResult: action.payload.actionResult
+        //         },
         //         characterStatsObject: {
         //             health: action.payload.actionResult.health,
         //             hunger: action.payload.actionResult.hunger,

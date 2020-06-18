@@ -5,7 +5,6 @@ import Slot from "./Slot";
 const Slots = () => {
   const slotContext = useContext(SlotContext);
   const { slotsArray, iconArray, slotsStyleArray, isSpinning } = slotContext;
-  console.log("STYLE", slotsStyleArray)
   if (slotsArray === null || isSpinning) {
     return (
       <div className="slots-container grid-3">
