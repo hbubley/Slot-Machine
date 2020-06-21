@@ -7,14 +7,15 @@ import SpinResults from './SpinResults'
 
 const Game = () => {
     const slotContext = useContext(SlotContext)
-    const { character, generation} = slotContext
+    const { generationCount, actionResult} = slotContext
+    const {result, action, hunger_change, health_change, offspring_change, fight_result} = actionResult
     return (
         <div className='game-container'>
-            <h1>Generation: {generation}</h1>
+            <h1>Generation: {generationCount}</h1>
             <Slots />
             <Controls />
             <CharacterStat />
-            {/* <SpinResults character={character} pCount={pCount} sCount={sCount} fightResult={fightResult} action={action} statChange={gameObject}/>  */}
+            {fight_result && <SpinResults action={action} result={result} fight_result={fight_result} health_change={health_change} hunger_change={hunger_change} offspring_change={offspring_change}/>}
         </div>
     )
 }

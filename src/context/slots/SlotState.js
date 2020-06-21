@@ -20,23 +20,23 @@ const SlotState = (props) => {
         iconArray: ["fad fa-badger-honey", "fad fa-snake", "fad fa-rabbit"],
         character: null,
         characterArray: ["rabbit", "snake", "badger"],
+        characterStatsObject: {},
         slotsArray: null,
         slotsStyleArray: [],
         isSpinning: false,
         isLoading: false,
         isReady: false,
-        numberOfSpins: 0,
-        generation: 1,
-        fightResult: {},
+        spinCount: 0,
+        generationCount: 1,
         actionResult: {},
         isGameOver: false,
+        score: 0
     };
     const [state, dispatch] = useReducer(SlotReducer, initialState);
 
     const spin = (array, character) => {
         let newArray = [];
         let classArray = [];
-        console.log("array", array);
         toggleSpin();
         for (let i = 0; i < 3; i++) {
             let ranNum = Math.floor(Math.random() * Math.floor(array.length));
@@ -71,172 +71,286 @@ const SlotState = (props) => {
 
     const fightFunction = (pCount) => {
         let { character } = state;
-        let fResult = { initialPredators: pCount, remainingPredators: pCount };
+        let fResult = {};
         let cAttack = Math.floor(
             Math.random() * Math.floor(character.strength * 100)
         );
-        let pAttack = Math.floor(Math.random() * Math.floor(pCount * 20));
-        console.log("random number", character, pCount, pAttack, cAttack);
+        let pAttack = Math.floor(Math.random() * Math.floor(pCount * 30));
+        if (pCount !== 0) {
             if (cAttack > pAttack) {
                 fResult = {
-                    result: "WIN",
-                    initialPredators: pCount,
-                    remainingPredators: pCount - 1,
+                    result_text: "WIN",
+                    initial_predators: pCount,
+                    remaining_predators: pCount - pCount,
                 };
             } else if (cAttack > pAttack / pCount) {
                 fResult = {
-                    result: "MIX",
-                    initialPredators: pCount,
-                    remainingPredators: pCount - 1,
+                    result_text: "MIX",
+                    initial_predators: pCount,
+                    remaining_predators: pCount - 1,
                 };
             } else {
                 fResult = {
-                    result: "LOSE",
-                    initialPredators: pCount,
-                    remainingPredators: pCount,
+                    result_text: "LOSE",
+                    initial_predators: pCount,
+                    remaining_predators: pCount,
                 };
             }
+        } else {
+            fResult = {
+                result_text: "NONE",
+                initial_predators: 0,
+                remaining_predators: 0,
+            };
         }
-
         return fResult;
     };
 
     const actionFunction = (action, countObject) => {
         let { character } = state;
-        let aResult = {};
-        let hunger = -10;
-        let health = 0;
-        let offspring = 0;
-        let fightResult = fight(countObject.indexOneCount)
-        let predatorCount = fightResult.remainingPredators
+        let actionResultObject = {};
+        let hungerChange = -10;
+        let healthChange = 0;
+        let offspringChange = 0;
+        let fightResult = fightFunction(countObject.indexOneCount);
+        let predatorCount = fightResult.remaining_predators;
+
         switch (action) {
             case "HUNT":
                 if (countObject.indexTwoCount === 1 && predatorCount < 1) {
-                    hunger = hunger + 10;
-                    aResult = {
+                    hungerChange = hungerChange + 10;
+                    actionResultObject = {
                         result: 1,
                         action: "hunt",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
-                        fResult: 
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else if (countObject.indexTwoCount === 2 && predatorCount < 1) {
-                    hunger = hunger + 30;
-                    aResult = {
+                } else if (
+                    countObject.indexTwoCount === 2 &&
+                    predatorCount < 1
+                ) {
+                    hungerChange = hungerChange + 30;
+                    actionResultObject = {
                         result: 2,
                         action: "hunt",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else if (countObject.indexTwoCount === 3 && predatorCount < 1) {
-                    hunger = hunger + 50;
-                    aResult = {
+                } else if (
+                    countObject.indexTwoCount === 3 &&
+                    predatorCount < 1
+                ) {
+                    hungerChange = hungerChange + 50;
+                    actionResultObject = {
                         result: 3,
                         action: "hunt",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else {
-                    aResult = {
-                        result: 0,
-                        action: "hunt",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
-                    };
-                }
+                }         
                 break;
             case "BREED":
                 if (countObject.indexTwoCount === 1 && predatorCount < 1) {
-                    offspring = offspring + Math.floor(character.offspring / 3);
-                    aResult = {
+                    offspringChange =
+                        offspringChange + Math.floor(character.offspring / 3);
+                    actionResultObject = {
                         result: 1,
                         action: "breed",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else if (countObject.indexTwoCount === 2 && predatorCount < 1) {
-                    offspring = offspring + Math.floor(character.offspring / 2);
-                    aResult = {
+                } else if (
+                    countObject.indexTwoCount === 2 &&
+                    predatorCount < 1
+                ) {
+                    offspringChange =
+                        offspringChange + Math.floor(character.offspring / 2);
+                    actionResultObject = {
                         result: 2,
                         action: "breed",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else if (countObject.indexTwoCount === 3 && predatorCount < 1)  {
-                    offspring = offspring + Math.floor(character.offspring);
-                    aResult = {
+                } else if (
+                    countObject.indexTwoCount === 3 &&
+                    predatorCount < 1
+                ) {
+                    offspringChange =
+                        offspringChange + Math.floor(character.offspring);
+                    actionResultObject = {
                         result: 3,
                         action: "breed",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else {
-                    aResult = {
-                        result: 0,
-                        action: "breed",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
-                    };
-                }
+                } 
                 break;
             case "REST":
                 if (countObject.indexTwoCount === 1 && predatorCount < 1) {
-                    health = health + 10;
-                    aResult = {
+                    healthChange = healthChange + 10;
+                    actionResultObject = {
                         result: 1,
                         action: "offspring",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else if (countObject.indexTwoCount === 2 && predatorCount < 1) {
-                    health = health + 30;
-                    aResult = {
+                } else if (
+                    countObject.indexTwoCount === 2 &&
+                    predatorCount < 1
+                ) {
+                    healthChange = healthChange + 30;
+                    actionResultObject = {
                         result: 2,
                         action: "offspring",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else if (countObject.indexTwoCount === 3 && predatorCount < 1) {
-                    health = health + 50;
-                    aResult = {
+                } else if (
+                    countObject.indexTwoCount === 3 &&
+                    predatorCount < 1
+                ) {
+                    healthChange = healthChange + 50;
+                    actionResultObject = {
                         result: 3,
                         action: "offspring",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
+                        hunger_change: hungerChange,
+                        health_change: healthChange,
+                        offspring_change: offspringChange,
+                        fight_result: fightResult,
                     };
-                } else {
-                    aResult = {
-                        result: 0,
-                        action: "offspring",
-                        hunger: hunger,
-                        health: health,
-                        offspring: offspring,
-                    };
-                }
+                } 
                 break;
             default:
                 break;
         }
-        return aResult;
+        if (predatorCount === 1) {
+            healthChange = -10;
+            actionResultObject = {
+                result: -1,
+                action: action,
+                hunger_change: hungerChange,
+                health_change: healthChange,
+                offspring_change: offspringChange,
+                fight_result: fightResult,
+            };
+        } else if (predatorCount === 2) {
+            healthChange = -30;
+            actionResultObject = {
+                result: -2,
+                action: action,
+                hunger_change: hungerChange,
+                health_change: healthChange,
+                offspring_change: offspringChange,
+                fight_result: fightResult,
+            }
+        } else if (predatorCount === 3) {
+            healthChange = -60;
+            actionResultObject = {
+                result: -3,
+                action: action,
+                hunger_change: hungerChange,
+                health_change: healthChange,
+                offspring_change: offspringChange,
+                fight_result: fightResult,
+            }
+        }else if(predatorCount === 0 && countObject.indexTwoCount<=0){
+            actionResultObject = {
+                result: 0,
+                action: action,
+                hunger_change: hungerChange,
+                health_change: healthChange,
+                offspring_change: offspringChange,
+                fight_result: fightResult,
+            };
+        }
+        return actionResultObject;
+    };
+
+    const spinOutcomes = (resultsObject) => {
+        let {
+            character,
+            characterStatsObject,
+            spinCount,
+            generationCount,
+        } = state;
+        const { health, hunger } = character;
+        const {
+            health_change,
+            hunger_change,
+            offspring_change,
+        } = resultsObject;
+        const {
+            current_health,
+            current_hunger,
+            current_offspring,
+        } = characterStatsObject;
+        let characterCurrentState = {
+            cHunger: current_hunger + hunger_change,
+            cHealth: current_health + health_change,
+            cOffspring: current_offspring + offspring_change,
+        };
+
+        let gCount = generationCount;
+        if ((spinCount + 1) / 10 === generationCount) {
+            gCount = generationCount + 1;
+        }
+        if ((current_health + health_change) <= 0 || (current_hunger + hunger_change) <= 0) {
+            if((current_offspring + offspring_change)<=0){
+                gameOver(spinCount, generationCount) 
+            }
+            characterCurrentState = {
+                cHunger: hunger,
+                cHealth: health,
+                cOffspring: current_offspring - 1,
+            };
+        }
+
+        dispatch({
+            type: SPIN_OUTCOME,
+            payload: { characterCurrentState, gCount },
+        });
+    };
+
+    const getActionSpin = (action, iconArray) => {
+        const { character } = state;
+        let spinObject = spin(iconArray, character);
+        let shuffledArray = spinObject.newArray;
+        let styleArray = spinObject.classArray;
+        let resultsCountObject = getResults(shuffledArray, iconArray);
+        let actionResult = actionFunction(action, resultsCountObject);
+        spinOutcomes(actionResult);
+        dispatch({
+            type: ACTION_SPIN,
+            payload: {
+                shuffledArray,
+                styleArray,
+                resultsCountObject,
+                actionResult,
+            },
+        });
     };
 
     const getCharacterSpin = () => {
         const { iconArray } = state;
         let spinArray = spin(iconArray);
-        console.log("getCharacterSpin -> spinArray", spinArray);
         let results = getResults(spinArray.newArray, iconArray);
-        console.log("getCharacterSpin -> results", results);
+
         let character = null;
         if (results.indexZeroCount === 3) {
             character = characterData.badger;
@@ -251,32 +365,17 @@ const SlotState = (props) => {
         });
     };
 
-    const getActionSpin = (action, iconArray) => {
-        const { character } = state;
-        let spinObject = spin(iconArray, character);
-        let shuffledArray = spinObject.newArray;
-        let styleArray = spinObject.classArray;
-        let resultsCountObject = getResults(shuffledArray, iconArray);
-        let actionResult = actionFunction(action, resultsCountObject);
-        dispatch({
-            type: ACTION_SPIN,
-            payload: {
-                shuffledArray,
-                styleArray,
-                resultsCountObject,
-                actionResult,
-            },
-        });
-    };
-
     const toggleSpin = () => {
         dispatch({
             type: TOGGLE_SPIN,
         });
     };
-    const gameOver = () => {
+
+    const gameOver = (spinCount, generationCount) => {
+        let score = spinCount*generationCount
         dispatch({
             type: GAME_OVER,
+            payload: score
         });
     };
     const toggleIsReady = () => {
@@ -285,53 +384,6 @@ const SlotState = (props) => {
         });
     };
 
-    // const getActionSpin = (action, iconArray) => {
-    //     const { character } = state;
-    //     let spinResult = spin(iconArray, character);
-    //     let spinArray = spinResult.newArray;
-    //     let styleArray = spinResult.classArray;
-    //     let actionResult = actionFunction(character, action, spinArray, iconArray)
-    //     actionResult.aResult.health = (actionResult.aResult.health)-(actionResult.fResult.health)
-    //     spinOutcomes(actionResult.aResult, actionResult.fResult);
-    //     dispatch({
-    //         type: ACTION_SPIN,
-    //         payload: {
-    //             spinArray,
-    //             styleArray
-    //         },
-    //     });
-    // };
-
-    // const spinOutcomes = (actionResult, fightResult) => {
-    //     const {
-    //         character,
-    //         characterStatsObject,
-    //         gameObject,
-    //     } = state;
-    //     let spinCount = gameObject.numberOfSpins + 1;
-    //     let generationCount = gameObject.generation;
-    //     let cOffspring = characterStatsObject.offspring + actionResult.offspring;
-    //     if (spinCount % (generationCount * 10) === 0) {
-    //         generationCount = generationCount + 1;
-    //     }
-    //     if(characterStatsObject.health + actionResult.health <= 0 || characterStatsObject.hunger + actionResult.hunger <= 0) {
-    //         cOffspring = cOffspring - 1;
-    //         actionResult.health=character.health
-    //         actionResult.hunger=character.hunger
-    //         fightResult=4
-    //         if (cOffspring < 0) {
-    //             gameOver()
-    //         }
-    //     }else{
-    //         actionResult.health=characterStatsObject.health + actionResult.health
-    //         actionResult.hunger=characterStatsObject.hunger + actionResult.hunger
-    //     }
-    //     dispatch({
-    //         type: SPIN_OUTCOME,
-    //         payload: { cOffspring, generationCount, spinCount, actionResult, fightResult },
-    //     });
-    // };
-
     return (
         <SlotContext.Provider
             value={{
@@ -339,26 +391,25 @@ const SlotState = (props) => {
                 character: state.character,
                 characterArray: state.characterArray,
                 characterIconArray: state.characterIconArray,
+                characterStatsObject: state.characterStatsObject,
                 slotsArray: state.slotsArray,
                 slotsStyleArray: state.slotsStyleArray,
                 isSpinning: state.isSpinning,
                 isLoading: state.isLoading,
                 isReady: state.isReady,
-                numberOfSpins: state,
-                generation: state.generation,
+                spinCount: state.spinCount,
+                generationCount: state.generationCount,
                 fightResult: state.fightResult,
                 actionResult: state.actionResult,
-                health: state.health,
-                hunger: state.hunger,
-                offspring: state.offspring,
                 results: state.results,
                 isGameOver: state.isGameOver,
+                score: state.score,
                 getCharacterSpin,
                 getActionSpin,
                 getResults,
                 toggleSpin,
                 toggleIsReady,
-                // spinOutcomes,
+                spinOutcomes,
             }}
         >
             {props.children}
@@ -376,7 +427,7 @@ export default SlotState;
 // },
 
 // const fightFunction = (character, pCount) => {
-//     let fResult={}
+//     let fightResult={}
 //     let cAttack = Math.floor(
 //         Math.random() * Math.floor(character.strength * 100)
 //     );

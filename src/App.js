@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import "./components/game-parts/game.scss"
+import "./components/game.scss"
 import GameContainer from './components/pages/GameContainer'
 import SlotState from "./context/slots/SlotState";
 import Navbar from "./components/layout/Navbar";
